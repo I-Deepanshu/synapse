@@ -1,101 +1,267 @@
-import Image from "next/image";
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { NavBar } from "@/components/nav-bar"
+import { Footer } from "@/components/footer"
+import { Check } from "lucide-react"
 
-export default function Home() {
+export default function HomePage() {
+  const services = [
+    {
+      title: "Personalized Risk Assessment",
+      description:
+        "Analyze health data to provide tailored cancer risk insights. Offer easy-to-understand results to empower better decision-making",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.26.09_19a93f44.jpg-JwGRe3k8MN5LsmomNYQWSlhJuLYNOL.jpeg",
+    },
+    {
+      title: "AI-Powered Predictions",
+      description:
+        "Use advanced algorithms to detect early warning signs of cancer. Continuously improve accuracy with machine learning and large datasets.",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.26.55_bf4f9a93.jpg-oDtzywJEp5I77qkpiXsSh96ErK5IA3.jpeg",
+    },
+    {
+      title: "Data Integration",
+      description:
+        "Seamlessly integrate with healthcare systems via SMART on FHIR. Combine medical records, lifestyle factors, and genetic information.",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.27.46_1e7524ba.jpg-5LWDvMz1fItuqmHAGQSoMmrdcR3iuH.jpeg",
+    },
+    {
+      title: "Community Insights",
+      description:
+        "Aggregate anonymized data to identify high-risk areas and trends. Help policymakers and organizations focus resources effectively.",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.30.06_f98efe83.jpg-zOD0MreBfNPfaDpvoMtAQY6EkmOYUc.jpeg",
+    },
+    {
+      title: "Privacy & Security",
+      description:
+        "Adhere to GDPR and HIPAA standards to protect user data. Use encrypted channels for data transmission and secure storage.",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.30.45_ee8ba3cc.jpg-VykOXqnWEqI4ODzMsjbF6epgMoQzzg.jpeg",
+    },
+    {
+      title: "Awareness & Education",
+      description:
+        "Provide resources to educate individuals and communities about early detection. Promote proactive health management through blogs and campaigns",
+      icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2000.28.21_ab0a7b30.jpg-jbeyZavbMTKZUFyB0rXMOApgc0Diz8.jpeg",
+    },
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+
+      {/* Hero Section */}
+      <section className="relative h-[600px]">
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/images/homehero.png"
+          alt="Medical Technology Visualization"
+          fill
+          className="object-cover"
           priority
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative container mx-auto h-full flex flex-col justify-center px-4">
+          <h1 className="text-white text-5xl md:text-6xl font-bold max-w-2xl mb-6">
+            AI-Powered Cancer Prediction Platform
+          </h1>
+          <p className="text-white text-xl max-w-2xl mb-8">
+            Take control of your health with our advanced AI technology that helps detect early signs of cancer.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/sign-in">
+              <Button size="lg" variant="outline" className="bg-white text-[#0A4958] hover:bg-gray-100">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button size="lg" className="bg-[#0A4958] hover:bg-[#0A4958]/90">
+                Get Started
+              </Button>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+
+      {/* Solution Section */}
+      <section className="py-16 relative">
+        <Image
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rectangle%20116-jUpYno4GE0RQDvqU2LfGM2dL24ozJn.png"
+          alt="Background Texture"
+          fill
+          className="object-cover opacity-10"
+        />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <Image
+                src="/images/homemost.png"
+                alt="Medical Team"
+                width={600}
+                height={400}
+                className="rounded-lg"
+              />
+            </div>
+            <div className="space-y-6">
+              <h2 className="text-4xl font-bold text-red-500">THE MOST LEADING SOLUTION FOR YOU</h2>
+              <p className="text-lg">
+                Take Charge Of Your Health Today. Our AI-Powered Tool Provides Personalized Cancer Risk Assessments
+                Based On Your Lifestyle, Genetics, And Medical History.
+              </p>
+              <div className="grid gap-4">
+                <div className="flex items-center gap-2">
+                  <Check className="text-[#0A4958]" />
+                  <span>Early Detection Technology</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="text-[#0A4958]" />
+                  <span>Personalized Risk Assessment</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="text-[#0A4958]" />
+                  <span>24/7 Expert Support</span>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Link href="/sign-up">
+                  <Button className="bg-[#0A4958] hover:bg-[#0A4958]/90">Create Account</Button>
+                </Link>
+                <Link href="/sign-in">
+                  <Button variant="outline" className="border-[#0A4958] text-[#0A4958]">
+                    Sign In
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Do Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-[#0A4958] text-sm uppercase tracking-wider mb-2">Key To Health</p>
+            <h2 className="text-4xl font-bold italic" style={{ fontFamily: "serif" }}>
+              WHAT WE DO
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="p-6">
+                <Image
+                  src={service.icon || "/placeholder.svg"}
+                  alt={service.title}
+                  width={100}
+                  height={100}
+                  className="mb-4"
+                />
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Healthcare AI Cases */}
+      <section className="py-16 relative">
+        <Image
+          src="/images/our clients.png"
+          alt="Wave Background"
+          fill
+          className="object-cover"
+        />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <p className="text-[#0A4958] text-sm uppercase tracking-wider mb-2">RECENT CASE STUDIES</p>
+              <h2 className="text-4xl font-bold"></h2>
+            </div>
+            <Link href="/sign-up">
+              <Button className="bg-[#0A4958] hover:bg-[#0A4958]/90">Get Started Today</Button>
+            </Link>
+          </div>
+          <div className="w-full">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6f590b29-58db-44b7-9f0f-dd82c8db60e8-gVH7scTzkvw4fIBMgEU9t4EKIwkVje.png"
+              alt="Healthcare AI Cases"
+              width={1906}
+              height={933}
+              className="object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="relative h-[400px]">
+        <Image
+          src="/images/contact us.png"
+          alt="Contact Background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative container mx-auto h-full flex flex-col justify-center items-end px-4">
+          <div className="max-w-lg text-white">
+            <h2 className="text-4xl font-bold mb-4">Need Any Health Advices Related To Cancer</h2>
+            <div className="flex gap-4">
+              <Link href="/sign-up">
+                <Button className="bg-[#0A4958] hover:bg-[#0A4958]/90">Create Account</Button>
+              </Link>
+              <Link href="/sign-in">
+                <Button variant="outline" className="bg-white text-[#0A4958] hover:bg-gray-100">
+                  Sign In
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Smart Team Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/our%20team-gznXqgZSH41pLj9E7QnAewF6tqncY5.png"
+            alt="Our Smart Team"
+            width={400}
+            height={100}
+            className="mx-auto mb-12"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+          <div className="grid md:grid-cols-2 gap-8">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-12%20at%2002.28.27_fa3db62c%201-WNarVreyCSIKx4QzSBExR5Vnsca8Ay.png"
+              alt="AI Healthcare Interface"
+              width={1077}
+              height={609}
+              className="object-contain h-[609] w-[1077]"
+            />
+            <Image
+              src="/images/homelast.png"
+              alt="AI Team Visualization"
+              width={1077}
+              height={609}
+              className="object-contain h-[609] w-[1077]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Logo Section */}
+      <section className="py-8 bg-[#0A4958]">
+        <div className="container mx-auto px-4">
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src="/images/Oncologers.png"
+            alt="Oncologers Button"
+            width={300}
+            height={60}
+            className="mx-auto cursor-pointer hover:opacity-90 transition-opacity"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </section>
+
+      <Footer />
     </div>
-  );
+  )
 }

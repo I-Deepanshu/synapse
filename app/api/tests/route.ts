@@ -13,13 +13,24 @@ export async function POST(request: Request) {
 
     await dbConnect()
 
-    const { testType, answers, imageUrl, result } = await request.json()
+    let body
+    try {
+      body = await request.json()
+    } catch (error) {
+      return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+    }
+
+    const { testType, answers, imageUrl, result } = body
+
+    if (!testType || !result) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
 
     const testResult = await TestResult.create({
       userId: session.user.id,
       testType,
-      answers: answers || undefined,
-      imageUrl: imageUrl || undefined,
+      answers: answers ?? undefined,
+      imageUrl: imageUrl ?? undefined,
       result,
     })
 
@@ -43,17 +54,17 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const testType = searchParams.get("testType")
 
-    const query = { userId: session.user.id }
+    // Ensure TypeScript understands the query structure
+    const query: { userId: string; testType?: string } = { userId: session.user?.id }
     if (testType) {
       query.testType = testType
     }
 
     const testResults = await TestResult.find(query).sort({ createdAt: -1 })
 
-    return NextResponse.json({ testResults })
+    return NextResponse.json({ testResults }, { status: 200 })
   } catch (error) {
     console.error("Test results fetch error:", error)
     return NextResponse.json({ error: "Failed to fetch test results" }, { status: 500 })
   }
 }
-

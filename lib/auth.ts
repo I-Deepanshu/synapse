@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import dbConnect from "@/lib/mongodb"
 import User from "@/models/User"
+import bcrypt from "bcryptjs"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -14,19 +15,19 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null
+          throw new Error("Email and password are required")
         }
 
         await dbConnect()
 
-        const user = await User.findOne({ email: credentials.email })
+        const user = await User.findOne({ email: credentials.email }).select("+password")
         if (!user) {
-          return null
+          throw new Error("Invalid email or password")
         }
 
-        const isPasswordValid = await user.comparePassword(credentials.password)
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
         if (!isPasswordValid) {
-          return null
+          throw new Error("Invalid email or password")
         }
 
         return {
@@ -48,10 +49,13 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id as string
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id as string,
+        },
       }
-      return session
     },
   },
   pages: {
@@ -62,4 +66,3 @@ export const authOptions: NextAuthOptions = {
 }
 
 export const auth = () => getServerSession(authOptions)
-

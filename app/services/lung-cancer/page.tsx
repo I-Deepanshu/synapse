@@ -39,9 +39,7 @@ export default function LungCancerPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
-  const [result, setResult] = useState<{
-    risk: "HIGH" | "LOW" | null
-  }>({ risk: null })
+  const [result, setResult] = useState<{ risk: "HIGH" | "LOW" | null }>({ risk: null })
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -75,11 +73,12 @@ export default function LungCancerPage() {
         yesCount > 5 ||
         (formData.smoking === "Yes" && formData.shortnessOfBreath === "Yes" && formData.coughing === "Yes")
 
-      const resultData = {
-        risk: isHighRisk ? "HIGH" : "LOW",
-      }
+        const resultData: { risk: "HIGH" | "LOW" } = {
+            risk: isHighRisk ? "HIGH" : "LOW",
+        }
 
-      setResult(resultData)
+        setResult(resultData)
+
       setIsSubmitting(false)
 
       // Save result to database
@@ -362,4 +361,3 @@ export default function LungCancerPage() {
     </div>
   )
 }
-

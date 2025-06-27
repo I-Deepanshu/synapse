@@ -22,7 +22,7 @@ export default function AmenitiesPage() {
     },
     {
       name: "Khushi Singh",
-      role: "Galgotias",
+      role: "Galgotias University",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KHUSHI-UsWvEwGtIjgmDnn2z2uDJPSgTZ0OAQ.png",
       linkedin: "https://www.linkedin.com/in/khushi-singh-18596524a/",
     },
